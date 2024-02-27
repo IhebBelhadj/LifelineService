@@ -14,6 +14,7 @@ public class Asset {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long assetId;
 
+
     private String fileName;
 
     private String fileType;

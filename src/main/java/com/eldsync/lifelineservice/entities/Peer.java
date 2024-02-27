@@ -13,13 +13,18 @@ public class Peer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPeer;
 
+    private Long elderId;
+
     private String linkedAccount;
 
     private String bioDescription;
 
+    @OneToOne
+    private Asset profilePicture;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "peers")
     private List<Dot> dots;
 }

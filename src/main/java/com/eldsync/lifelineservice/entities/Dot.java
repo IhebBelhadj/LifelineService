@@ -14,6 +14,8 @@ public class Dot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDot;
 
+    private Long elderId;
+
     private Date eventDate;
 
     private String dotMarkdown;
@@ -26,7 +28,7 @@ public class Dot {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Asset> assets;
 
-    @ManyToMany(mappedBy = "dots")
+    @ManyToMany()
     private List<Peer> peers;
 
 }

@@ -1,0 +1,129 @@
+scalar Date
+
+# Types
+type Dot {
+    idDot: ID!
+    elderId: Int!
+    eventDate: Date!
+    dotMarkdown: String!
+    emotionType: EmotionType!
+    emotionIntensity: Int!
+    assets: [Asset]
+    peers: [Peer]
+}
+
+enum EmotionType {
+    HAPPY
+    SAD
+    ANGRY
+    NEUTRAL
+}
+
+type Asset {
+    assetId: ID!
+    fileName: String!
+    fileType: String!
+    filePath: String!
+    accessLink: String!
+}
+
+type Note {
+    noteId: ID!
+    noteMarkdown: String!,
+    createdAt: Date,
+    updatedAt: Date,
+    reminderTime: Date,
+    assets: [Asset]
+}
+
+type Peer {
+    idPeer: ID!
+    elderId: Int!
+    linkedAccount: String
+    bioDescription: String
+    profilePicture: Asset
+    notes: [Note]
+
+}
+
+
+# Inputs
+
+input NoteInput {
+    noteMarkdown: String
+    reminderTime: Date
+    assets: [ID]
+}
+
+input AssetInput {
+    assetId: ID!
+    fileName: String!
+    fileType: String!
+    filePath: String!
+    accessLink: String!
+}
+
+input DotInput {
+    elderId:Int
+    eventDate: Date
+    dotMarkdown: String
+    emotionType: EmotionType
+    emotionIntensity: Int
+    peers: [ID]
+    assets: [ID]
+}
+
+input PeerInput {
+    elderId: Int
+    linkedAccount: String
+    bioDescription: String
+    profilePicture: ID
+    notes: [ID]
+}
+
+
+# Queries
+
+type Query {
+#    Dot Queries
+    searchDots(
+        elderId: ID,
+        startDate: Date,
+        endDate: Date,
+        emotionType: EmotionType,
+        peerIds: [ID],
+    ): [Dot]
+    getDotWithId(dotId:ID):Dot!
+
+#    Note Queries
+    getNoteWithId(noteId:ID):Note!
+#    Asset Queries
+    getAssetWithId(assetId:ID):Asset!
+#    Peer Queries
+    getPeerWithId(peerId:ID):Peer!
+    getPeersByName(peerName:String):[Peer]
+}
+
+# Mutations
+
+type Mutation {
+#    Dot Mutations
+    createDot(dotData: DotInput):Dot
+    updateDot(dotUpdates: DotInput):Dot
+    DeleteDot(dotId:ID!):String
+#    Peer Mutations
+    appendPeerToDot(dotId: ID!, peerId:ID!):Dot
+    createPeer(peerData: PeerInput):Peer
+    updatePeer(peerId: ID!, peerUpdates:PeerInput):Peer
+    deletePeer(PeerId:ID!):String
+#    Notes Mutations
+    appendNoteToPeer(peerId: ID!,noteId:ID): Peer
+    createNote(noteData:NoteInput):Note
+    updateNote(noteId: ID!, editedNoteData: NoteInput): Note
+    deleteNote(noteId: ID!):String
+
+#    Assets Mutations
+    appendAssetToDot(peerId: ID!, assetId: ID!): Dot
+    createAsset(assetData:AssetInput):Asset
+    deleteAsset(assetId: ID!):String
+}
