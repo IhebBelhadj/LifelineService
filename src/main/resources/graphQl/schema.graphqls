@@ -109,13 +109,13 @@ type Query {
 type Mutation {
 #    Dot Mutations
     createDot(dotData: DotInput):Dot
-    updateDot(dotUpdates: DotInput):Dot
-    DeleteDot(dotId:ID!):String
+    updateDot(dotId:ID!, dotUpdates: DotInput):Dot
+    deleteDot(dotId:ID!):String
 #    Peer Mutations
     appendPeerToDot(dotId: ID!, peerId:ID!):Dot
     createPeer(peerData: PeerInput):Peer
     updatePeer(peerId: ID!, peerUpdates:PeerInput):Peer
-    deletePeer(PeerId:ID!):String
+    deletePeer(peerId:ID!):String
 #    Notes Mutations
     appendNoteToPeer(peerId: ID!,noteId:ID): Peer
     createNote(noteData:NoteInput):Note

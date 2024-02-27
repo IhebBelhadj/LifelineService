@@ -17,7 +17,7 @@ public interface DotService {
     );
     Dot getDotWithId(Long dotId);
     Dot createDot(DotInput dotData);
-    Dot updateDot(DotInput dotUpdates);
+    Dot updateDot(Long idDot ,DotInput dotUpdates);
     String deleteDot(Long dotId);
     Dot appendPeerToDot(Long dotId, Long peerId);
     Dot appendAssetToDot(Long dotId, Long assetId);

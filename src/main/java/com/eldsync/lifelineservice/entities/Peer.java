@@ -15,6 +15,9 @@ public class Peer {
 
     private Long elderId;
 
+    private String peerFullName;
+
+
     private String linkedAccount;
 
     private String bioDescription;

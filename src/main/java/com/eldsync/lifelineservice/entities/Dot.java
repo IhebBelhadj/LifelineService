@@ -2,12 +2,13 @@ package com.eldsync.lifelineservice.entities;
 
 import com.eldsync.lifelineservice.enums.EmotionType;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+@Data
 @Entity
 public class Dot {
     @Id
